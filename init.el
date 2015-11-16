@@ -134,3 +134,6 @@
 ;; theme
 (load "theme.el")
 
+;; auto complete
+(load "support.el")
+
