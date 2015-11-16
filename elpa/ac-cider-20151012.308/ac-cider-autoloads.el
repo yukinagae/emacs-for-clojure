@@ -4,7 +4,7 @@
 
 
 ;;;### (autoloads (ac-cider-popup-doc ac-cider-setup) "ac-cider"
-;;;;;;  "ac-cider.el" (22089 20636 0 0))
+;;;;;;  "ac-cider.el" (22089 25836 0 0))
 ;;; Generated autoloads from ac-cider.el
 
 (defface ac-cider-candidate-face '((t (:inherit ac-candidate-face))) "\
@@ -32,7 +32,8 @@ A popup alternative to `cider-doc'.
 
 ;;;***
 
-;;;### (autoloads nil nil ("ac-cider-pkg.el") (22089 20637 7914 0))
+;;;### (autoloads nil nil ("ac-cider-pkg.el") (22089 25836 725514
+;;;;;;  0))
 
 ;;;***
 
