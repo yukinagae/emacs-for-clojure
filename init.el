@@ -140,3 +140,6 @@
 ;; scala mode
 (unless (package-installed-p 'scala-mode2)
    (package-refresh-contents) (package-install 'scala-mode2))
+
+(tool-bar-mode -1)
+(menu-bar-mode -1)
