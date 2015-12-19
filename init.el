@@ -143,3 +143,15 @@
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
+
+;; folder tree
+(unless (package-installed-p 'neotree)
+   (package-refresh-contents) (package-install 'neotree))
+
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
+
+;; php-mode
+(unless (package-installed-p 'php-mode)
+   (package-refresh-contents) (package-install 'php-mode))
+(require 'php-mode)
