@@ -155,3 +155,19 @@
 (unless (package-installed-p 'php-mode)
    (package-refresh-contents) (package-install 'php-mode))
 (require 'php-mode)
+
+;; ensime
+(unless (package-installed-p 'ensime)
+   (package-refresh-contents) (package-install 'ensime))
+(require 'ensime)
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+
+(defun scala/enable-eldoc ()
+  "Show error message at point by Eldoc."
+    (setq-local eldoc-documentation-function
+  #'(lambda ()
+    (when (ensime-connected-p)
+     (let ((err (ensime-print-errors-at-point)))
+      (and err (not (string= err "")) err)))))
+    (eldoc-mode +1))
+(add-hook 'ensime-mode-hook #'scala/enable-eldoc)
