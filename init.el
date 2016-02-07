@@ -171,3 +171,70 @@
       (and err (not (string= err "")) err)))))
     (eldoc-mode +1))
 (add-hook 'ensime-mode-hook #'scala/enable-eldoc)
+
+;; web mode
+(unless (package-installed-p 'web-mode)
+   (package-refresh-contents) (package-install 'web-mode))
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.phtml$"     . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.jsp$"       . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x$"   . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb$"       . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?$"     . web-mode))
+(add-to-list 'auto-mode-alist '("\\.js?$"     . web-mode))
+
+(defun web-mode-hook ()
+   "Hooks for Web mode."
+    (setq web-mode-html-offset   2)
+    (setq web-mode-css-offset    2)
+    (setq web-mode-script-offset 2)
+    (setq web-mode-php-offset    2)
+    (setq web-mode-java-offset   2)
+    (setq web-mode-asp-offset    2))
+  (add-hook 'web-mode-hook 'web-mode-hook)
+
+(custom-set-faces
+  '(web-mode-doctype-face
+    ((t (:foreground "#82AE46"))))                          ; doctype
+  '(web-mode-html-tag-face
+    ((t (:foreground "#E6B422" :weight bold))))             ; 要素名
+  '(web-mode-html-attr-name-face
+    ((t (:foreground "#C97586"))))                          ; 属性名など
+  '(web-mode-html-attr-value-face
+    ((t (:foreground "#82AE46"))))                          ; 属性値
+  '(web-mode-comment-face
+    ((t (:foreground "#D9333F"))))                          ; コメント
+  '(web-mode-server-comment-face
+    ((t (:foreground "#D9333F"))))                          ; コメント
+  '(web-mode-css-rule-face
+    ((t (:foreground "#A0D8EF"))))                          ; cssのタグ
+  '(web-mode-css-pseudo-class-face
+    ((t (:foreground "#FF7F00"))))                          ; css 疑似クラス
+  '(web-mode-css-at-rule-face
+    ((t (:foreground "#FF7F00"))))                          ; cssのタグ
+   )
+
+;; whitespace
+(require 'whitespace)
+(setq whitespace-style '(face           ; faceで可視化
+                         trailing       ; 行末
+                         tabs           ; タブ
+                         empty          ; 先頭/末尾の空行
+                         space-mark     ; 表示のマッピング
+                         tab-mark
+                         ))
+(setq whitespace-display-mappings
+       '((tab-mark ?\t [?\u00BB ?\t] [?\\ ?\t])))
+(setq whitespace-space-regexp "\\(\u3000\\)")
+(setq whitespace-style '(face tabs tab-mark spaces space-mark))
+(setq whitespace-display-mappings ())
+(set-face-foreground 'whitespace-tab "#F1C40F")
+(set-face-background 'whitespace-space "#E74C3C")
+(global-whitespace-mode 1)
+
+;; disable tab indent
+(setq-default indent-tabs-mode nil)
+
+; 勝手にインデントしないようにする設定
+(electric-indent-mode 0)
