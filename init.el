@@ -155,6 +155,7 @@
 (unless (package-installed-p 'php-mode)
    (package-refresh-contents) (package-install 'php-mode))
 (require 'php-mode)
+(add-to-list 'auto-mode-alist '("\\.ctp$" . php-mode)) ; CakePHP
 
 ;; ensime
 (unless (package-installed-p 'ensime)
