@@ -134,6 +134,11 @@
 ;; theme
 (load "theme.el")
 
+(unless (package-installed-p 'atom-dark-theme)
+   (package-refresh-contents) (package-install 'atom-dark-theme))
+
+(load-theme 'atom-dark t)
+
 ;; auto complete
 (load "support.el")
 
@@ -163,6 +168,13 @@
 (require 'ensime)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
+(setq ensime-completion-style 'auto-complete)
+
+(global-set-key (kbd "C-c C-r r") 'ensime-refactor-rename)
+(global-set-key (kbd "C-c C-o i") 'ensime-refactor-organize-imports)
+(global-set-key (kbd "C-c C-i l") 'ensime-refactor-inline-local)
+(global-set-key (kbd "C-c C-t i") 'ensime-inspect-by-path)
+
 (defun scala/enable-eldoc ()
   "Show error message at point by Eldoc."
     (setq-local eldoc-documentation-function
@@ -172,6 +184,8 @@
       (and err (not (string= err "")) err)))))
     (eldoc-mode +1))
 (add-hook 'ensime-mode-hook #'scala/enable-eldoc)
+
+
 
 ;; web mode
 (unless (package-installed-p 'web-mode)
@@ -184,6 +198,7 @@
 (add-to-list 'auto-mode-alist '("\\.erb$"       . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?$"     . web-mode))
 (add-to-list 'auto-mode-alist '("\\.js?$"     . web-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx$"     . web-mode))
 
 (defun web-mode-hook ()
    "Hooks for Web mode."
