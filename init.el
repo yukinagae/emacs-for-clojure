@@ -254,3 +254,20 @@
 
 ; 勝手にインデントしないようにする設定
 (electric-indent-mode 0)
+
+;; scroll
+(unless (package-installed-p 'smooth-scroll)
+   (package-refresh-contents) (package-install 'smooth-scroll))
+(require 'smooth-scroll)
+(smooth-scroll-mode t)
+
+;; rustlang
+(unless (package-installed-p 'rust-mode)
+   (package-refresh-contents) (package-install 'rust-mode))
+(require 'rust-mode)
+(autoload 'rust-mode "rust-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+
+;; auto-complete-mode
+(require 'auto-complete)
+(global-auto-complete-mode t)
